@@ -4,10 +4,7 @@ require_once('../header.php');
 $id=$_GET['id'];
 $name=$_GET['name'];
 //$con = new mysqli('localhost', 'root', '', 'production_automation');
-
 ?>
-
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -26,8 +23,6 @@ $name=$_GET['name'];
             </div>
         </div><!-- /.container-fluid -->
     </section>
-
-
     <!-- Main content -->
     <section class="content">
         <div class="h3">Stock Details</div>
@@ -48,21 +43,18 @@ $name=$_GET['name'];
                     </tr>
                 </thead>
                 <tbody>
-
                     <?php
-                    $date = "2023-12-11";
-                    $now = time();
-                    $your_date = strtotime("2023-12-11");
-                    $datediff = $now - $your_date;
-                    $date_start = round((($datediff / ((60 * 60)) + 12) / 24));
+                    $today=date("Y-m-d");
+                        $convert = strtotime($today);
+                        $tomorrow=strtotime('+1 day', $convert);
                     $ostock = 0;
                     $sreturn = 0;
                     $mwastage = 0;
-                    for ($i = 0; $i < $date_start; $i++) {
-                        $date_count = $date++;
+                    for ($i=0;$i<30;$i++) {
+                       $tomorrow= strtotime('-1 day', $tomorrow);
+                            $date_count=date('Y-m-d', $tomorrow);
                     ?>
                         <tr>
-
                             <td>
                                 <?php echo $date_count ?>
                             </td>
@@ -90,32 +82,20 @@ $name=$_GET['name'];
                             </td>
                             <td>
                                 <?php echo "0" ?>
-
                             </td>
-
                             <td>
                                 <?php echo $ostock - $sreturn - $mwastage ?>
-
                             </td>
-
-
                         </tr>
                     <?php } ?>
-
-
                 </tbody>
             </table>
         </div>
         <!-- /.card -->
-
     </section>
     <!-- /.content -->
 </div>
-
-
-
 <!-- /.content-wrapper -->
 <?php
-
 require_once('../footer.php')
 ?>
